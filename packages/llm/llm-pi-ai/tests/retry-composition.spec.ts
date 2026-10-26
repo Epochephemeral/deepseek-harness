@@ -17,6 +17,7 @@ import * as JsonlPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
 import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
 import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
 import ToolRuntime from '@deepseek-ai/dsh-tools'
+import * as NativeToolExecutor from '@deepseek-ai/dsh-tool-executor-native'
 import { closeMockServers, mockServer } from './mock-server.ts'
 
 let root: string | undefined
@@ -58,6 +59,7 @@ it('retries a Codex overload once and persists the SERVER failure and successful
     '    compression: none',
     "- name: '@deepseek-ai/dsh-system-prompt'",
     "- name: '@deepseek-ai/dsh-tools'",
+    "- name: '@deepseek-ai/dsh-tool-executor-native'",
     "- name: '@deepseek-ai/dsh-agent'",
     "- name: '@deepseek-ai/dsh-llm-pi-ai'",
     '  config:',
@@ -87,6 +89,7 @@ it('retries a Codex overload once and persists the SERVER failure and successful
     ['@deepseek-ai/dsh-session-persistence-jsonl', JsonlPersistence],
     ['@deepseek-ai/dsh-system-prompt', SystemPrompt],
     ['@deepseek-ai/dsh-tools', ToolRuntime],
+    ['@deepseek-ai/dsh-tool-executor-native', NativeToolExecutor],
     ['@deepseek-ai/dsh-agent', AgentRegistry],
     ['@deepseek-ai/dsh-llm-pi-ai', LlmPiAi],
     ['@deepseek-ai/dsh-llm-retry', Retry],
