@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`retries a Codex overload once and persists the SERVER failure and successful turn 1`] = `
+[
+  {
+    "delayMs": 1,
+    "failure": {
+      "code": "SERVER",
+      "message": "Codex error: Our servers are currently overloaded. Please try again later.",
+    },
+    "maxRetries": 1,
+    "mode": "normal",
+    "policyKey": "["normal",1,["EMPTY_RESPONSE","RATE_LIMIT","SERVER","TIMEOUT","TRANSPORT"],1,1,0]",
+    "provider": "openai-codex",
+    "retry": 1,
+    "retryId": "<retry-id>",
+    "step": 1,
+    "turn": 1,
+  },
+]
+`;

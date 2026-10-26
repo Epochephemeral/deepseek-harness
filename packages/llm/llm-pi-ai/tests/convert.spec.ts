@@ -939,6 +939,30 @@ describe('mapStopReason / mapUsage', () => {
   })
 
   it.each([
+    'Codex error: Our servers are currently overloaded. Please try again later.',
+    'The server is overloaded. Please try again later.',
+    'SERVER OVERLOADED',
+  ])('maps provider server-overload wording %j to SERVER', (errorMessage) => {
+    expect(mapStopReason(assistant({ stopReason: 'error', errorMessage }))).toEqual({
+      kind: 'error',
+      failure: { message: errorMessage, code: 'SERVER' },
+    })
+  })
+
+  it.each([
+    ['HTTP 401: Our servers are currently overloaded.', 'AUTH'],
+    ['HTTP 429: Our servers are currently overloaded.', 'RATE_LIMIT'],
+    ['HTTP 400: Our servers are currently overloaded.', 'INVALID_REQUEST'],
+    ['The overloaded function has no matching signature.', 'PI_AI_ERROR'],
+    ['The local worker is overloaded.', 'PI_AI_ERROR'],
+  ])('preserves the classification of %j as %s', (errorMessage, code) => {
+    expect(mapStopReason(assistant({ stopReason: 'error', errorMessage }))).toEqual({
+      kind: 'error',
+      failure: { message: errorMessage, code },
+    })
+  })
+
+  it.each([
     'other side closed',
     'HTTP2 request did not get a response',
     'WebSocket closed unexpectedly',
